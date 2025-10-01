@@ -1,16 +1,20 @@
 #!/bin/bash
 
+#SBATCH --partition=amd-512  # partição para a qual o job é enviado
+#SBATCH --time=0-0:5
+#SBATCH --nodes=1 #número de nós
+#SBATCH --ntasks-per-node=4 #número de tarefas por nós
 # ===============================================
 # CONFIGURAÇÕES
 # ===============================================
 
 # Número de processos (P): Ajuste este valor (ex: 4, 8, 16)
-NUM_PROCESSOS=8 
+NUM_PROCESSOS=4 
 
 # Nomes dos executáveis
-V1_EXE="difusão_bloqueante"
-V2_EXE="difusão_Nao_bloqueante_wait"
-V3_EXE="difusão_Nao_bloqueante_test"
+V1_EXE="difusao_bloqueante"
+V2_EXE="difusao_Nao_bloqueante_wait"
+V3_EXE="difusao_Nao_bloqueante_test"
 
 # Nomes dos arquivos de saída para o Python
 V1_OUT="time_v1_blocking.txt"
@@ -20,7 +24,7 @@ V3_OUT="time_v3_overlap.txt"
 echo "--- 🛠️ INICIANDO BENCHMARK DA TAREFA 15 (NP=${NUM_PROCESSOS}) ---"
 
 # Limpa saídas antigas (opcional)
-rm -f ${V1_OUT} ${V2_OUT} ${V3_OUT}
+#rm -f ${V1_OUT} ${V2_OUT} ${V3_OUT}
 
 # ===============================================
 # EXECUÇÃO E CAPTURA DE TEMPOS

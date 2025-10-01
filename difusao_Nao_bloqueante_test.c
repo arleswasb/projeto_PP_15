@@ -5,7 +5,7 @@
 
 // Parâmetros da Simulação (Os mesmos para todas as versões)
 #define GLOBAL_N 100000 
-#define STEPS 500
+#define STEPS 5000
 #define ALPHA 0.1       
 
 #define TAG_LEFT_TO_RIGHT 0

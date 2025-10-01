@@ -5,7 +5,7 @@
 
 // Parâmetros da Simulação
 #define GLOBAL_N 100000 // Tamanho total da barra
-#define STEPS 500       // Número de passos de tempo
+#define STEPS 5000       // Número de passos de tempo
 #define ALPHA 0.1       // Coeficiente de difusão (precisa ser < 0.5 para estabilidade)
 
 // Define uma tag para comunicação Esquerda -> Direita
