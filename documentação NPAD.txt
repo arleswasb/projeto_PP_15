@@ -30,8 +30,8 @@ questao 15 com MPI
 4.	#!/bin/bash
 	#SBATCH --partition=amd-512  # partição para a qual o job é enviado
 	#SBATCH --time=0-0:5
-	#SBATCH --nodes=4 #número de nós
-	#SBATCH --ntasks-per-node=5 #número de tarefas por nó
+	#SBATCH --nodes=2 #número de nós
+	#SBATCH --ntasks-per-node=4 #número de tarefas por nó variando de 4 a 32
 	#SBATCH --hint=compute_bound #uma thread por core e pode trazer benefícios de performance quando se usa apenas paralelismo de memória distribuída.
 
 	#programa a ser executado.
@@ -50,10 +50,5 @@ questao 15 com MPI
 8. cat slurm-JobID.out  #apos este comando que veeremos o resultado do que foi processado
 
 
-1595369   amd-512 run_simp wadsbarr PD       0:00      4 (QOSMaxCpuPerUserLimit)
-           1595371   amd-512 run_simp wadsbarr PD       0:00      4 (QOSMaxCpuPerUserLimit)
-           1595372   amd-512 run_simp wadsbarr PD       0:00      4 (QOSMaxCpuPerUserLimit)
-           1595374   amd-512 run_simp wadsbarr PD       0:00      4 (QOSMaxCpuPerUserLimit)
-           1595377   amd-512 run_simp wadsbarr PD 
 
 
