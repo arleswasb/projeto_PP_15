@@ -4,23 +4,18 @@
 #include <math.h>
 
 // Parâmetros da Simulação (Ajuste para o seu teste de desempenho)
-#define GLOBAL_N 100000 
-#define STEPS 5000
+#define GLOBAL_N 1000000 
+#define STEPS 10000
 #define ALPHA 0.1       
 
 #define TAG_LEFT_TO_RIGHT 0
 #define TAG_RIGHT_TO_LEFT 1
 
-/**
- * @brief Computa a nova temperatura para as células internas.
- * @param u_new Array de destino (passo t+1).
- * @param u Array de origem (passo t).
- * @param size Tamanho total do array local (incluindo halos).
- */
+
 void compute_inner(double* u_new, double* u, int size) {
-    // A computação vai do índice 1 até o size-2 (excluindo os halos)
+   
     for (int i = 1; i < size - 1; i++) {
-        // Equação de Difusão 1D
+        
         u_new[i] = u[i] + ALPHA * (u[i-1] - 2.0 * u[i] + u[i+1]);
     }
 }
@@ -74,15 +69,11 @@ int main(int argc, char** argv) {
         MPI_Isend(&u[1], 1, MPI_DOUBLE, left, TAG_LEFT_TO_RIGHT, MPI_COMM_WORLD, &requests[2]);
         MPI_Irecv(&u[0], 1, MPI_DOUBLE, left, TAG_RIGHT_TO_LEFT, MPI_COMM_WORLD, &requests[3]);
 
-        // 2. Espera Bloqueante usando MPI_Wait individualmente
-        // Esta versão não esconde latência, pois espera imediatamente pela comunicação.
-        
-        // Espera pelos IRecv para garantir que os halos chegaram (índices 1 e 3)
+         // Espera pelos ISend (índices 1 e 3)
         MPI_Wait(&requests[1], &status); 
         MPI_Wait(&requests[3], &status); 
 
         // Espera pelos ISend (índices 0 e 2)
-        // Isso garante que os buffers de envio sejam liberados antes do próximo passo.
         MPI_Wait(&requests[0], &status); 
         MPI_Wait(&requests[2], &status); 
         
